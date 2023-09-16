@@ -193,7 +193,7 @@ function App() {
             <button className={"AddBlockBtn"} onClick={AddBlock}>新增新區塊</button>
         </div>
         <div className={"ControlPart"}>
-            <h2 className={"ControlTitle"}>區塊鍊模擬計算</h2>
+            <h2 className={"ControlTitle"}>區塊鏈模擬計算</h2>
             <div className={"ControlTips"}>
                 <h3>使用教學</h3>
                 <ol type="1">
