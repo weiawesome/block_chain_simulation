@@ -60,24 +60,25 @@ function App() {
   function validateContent():boolean{
       if(fromRef.current!.value.length===0){
           alert("交易發起地址不得為空!");
-          return false
+          return false;
       }
       if(toRef.current!.value.length===0){
           alert("交易接收地址不得為空!");
-          return false
+          return false;
       }
       if(fromRef.current!.value===toRef.current!.value){
           alert("交易發起與接收地址不得為相同!");
+          return false;
       }
       if(amountRef.current!.value.length===0){
           alert("交易金額不得為空!");
-          return false
+          return false;
       }
       if(feesRef.current!.value.length===0){
           alert("交易發起地址不得為空!");
-          return false
+          return false;
       }
-      return true
+      return true;
   }
   function newTransaction():Transaction{
       let tmpTransaction=new Transaction();
