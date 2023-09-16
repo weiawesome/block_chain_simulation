@@ -1,38 +1,138 @@
 .App {
+  display: flex;
+  flex-direction: row;
+}
+.BlockChains{
+  flex:3;
+  display: grid;
+  flex-direction: row;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.ControlPart{
+  flex:1;
+  background-color: rgba(52, 132, 243, 0.4);
+}
+.Block{
   text-align: center;
+  border: solid rgb(34, 34, 34);
+  margin: 5%;
+  border-radius: 0.5rem;
+}
+.BlockTr{
+  display: flex;
+  word-break: break-all;
+  margin: 1%;
+  padding: 1%;
+  border: dashed;
+}
+.BlockTdIndex{
+  flex:2;
+  text-align: left;
+  font-size: smaller;
+}
+.BlockTd{
+  font-size: smaller;
+  flex:3;
+  text-align: right;
+}
+.BlockTop{
+  border: black solid;
+  margin: 5%;
+  padding: 2%;
+}
+.Transaction{
+  border: black solid;
+  margin: 5%;
+  padding: 2%;
+}
+.BlockId{
+  border: black solid;
+  margin: 5%;
+}
+.MineBlockBtn{
+  margin: 1%;
+  padding: 3%;
+  font-weight: bolder;
+}
+.AddBlockBtn{
+  min-height: 5rem;
+  padding: 5%;
+  margin: 5%;
+  font-size: medium;
+  font-weight: bold;
+  border-radius: 1rem;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h2{
+  font-size: medium;
+}
+h3{
+  font-size: small;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  .Block {
+    animation: Block-show 0.5s linear;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+@keyframes Block-show {
+  0% {
+    transform: scale(0.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+.ControlTips{
+  margin: 3%;
+}
+.ControlTitle{
+  text-align: center;
+}
+li{
+  font-size: x-small;
+}
+.DifficultyPart{
+  display: flex;
+  flex-direction: row;
+  padding: 3%;
+}
+.DifficultySlideBar{
+  flex: 3;
+}
+.DifficultyText{
+  flex:1;
+  font-size: x-small;
+}
+.TransactionPart{
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.TransactionText{
+  padding: 1%;
+  margin: 1%;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.AddTransactionBtn{
+  width: 100%;
+  margin: 3% 1% 1%;
+  background-color: rgba(56,255,0,0.5);
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: bolder;
+}
+.TransactionTr{
+  display: flex;
+  flex-direction: row;
+}
+.TransactionItem{
+  display: flex;
+  flex-direction: column;
+  word-break: break-all;
+  margin: 1%;
+  padding: 1%;
+  border: dashed;
 }
