@@ -82,10 +82,7 @@ function App() {
   }
   function newTransaction():Transaction{
       let tmpTransaction=new Transaction();
-      tmpTransaction.from=fromRef.current!.value;
-      tmpTransaction.to=toRef.current!.value;
-      tmpTransaction.amount=Number(amountRef.current!.value);
-      tmpTransaction.fees=Number(feesRef.current!.value);
+      tmpTransaction.loadInformation(fromRef.current!.value,toRef.current!.value,Number(amountRef.current!.value),Number(feesRef.current!.value));
       return tmpTransaction
   }
   const SignTransaction=()=>{
@@ -101,14 +98,19 @@ function App() {
             const transaction=newTransaction()
             if(transaction.verify(signature,publicKey)){
                 let tmpBlocks=[...blocks];
-                tmpBlocks[tmpBlocks.length-1].addTransaction(transaction);
-                fromRef.current!.value="";
-                toRef.current!.value=""
-                amountRef.current!.value="";
-                feesRef.current!.value="";
-                setSignature("");
-                setPublicKey("");
-                setBlocks(tmpBlocks);
+                let result=tmpBlocks[tmpBlocks.length-1].addTransaction(transaction);
+                if (result===true){
+                    fromRef.current!.value="";
+                    toRef.current!.value=""
+                    amountRef.current!.value="";
+                    feesRef.current!.value="";
+                    setSignature("");
+                    setPublicKey("");
+                    setBlocks(tmpBlocks);
+                }
+                else{
+                    alert("該筆交易被拒絕 此區塊中存在相同交易 交易尚未完成 請等待交易完成再嘗試!");
+                }
 
             }
             else{
@@ -158,6 +160,10 @@ function App() {
                             {item.transaction.map((transactionItem,transactionIndex)=>{
                                 return (
                                     <div className={"TransactionItem"}>
+                                        <tr className={"TransactionTr"}>
+                                            <td className={"BlockTdIndex"}>Id: </td>
+                                            <td className={"BlockTd"}>{transactionItem.id}</td>
+                                        </tr>
                                         <tr className={"TransactionTr"}>
                                             <td className={"BlockTdIndex"}>From: </td>
                                             <td className={"BlockTd"}>{transactionItem.from}</td>

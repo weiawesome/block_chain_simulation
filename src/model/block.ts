@@ -30,11 +30,17 @@ export class Block {
     setBlockHash(){
         this.block_hash=Hash_SHA256(Hash_SHA256(this.block_top.toString()));
     }
-    addTransaction(transaction:Transaction){
+    addTransaction(transaction:Transaction):boolean{
+        for (let i=0;i<this.transaction.length;i++){
+            if(this.transaction[i].id===transaction.id){
+                return false;
+            }
+        }
         this.transaction.push(transaction);
         this.setMarkelRoot();
         this.setBlockHash();
         this.status=false;
+        return true;
     }
 }
 export class BlockTop{
@@ -87,11 +93,13 @@ export class BlockTop{
     }
 }
 export class Transaction{
+    id:string;
     from: string;
     to:string;
     amount:number;
     fees:number;
     constructor() {
+        this.id="";
         this.from="";
         this.to="";
         this.amount=0;
@@ -99,6 +107,14 @@ export class Transaction{
     }
     toString(){
         return this.to+this.from+this.amount+this.amount;
+    }
+
+    loadInformation(from:string,to:string,amount:number,fees:number){
+        this.from=from;
+        this.to=to;
+        this.amount=amount;
+        this.fees=fees;
+        this.id=Hash_SHA256(this.toString());
     }
     signature(){
         const { public_key, private_key } = GenerateRSAKeyPair();
