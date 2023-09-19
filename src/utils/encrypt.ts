@@ -4,7 +4,6 @@ export function Hash_SHA256(value:string) {
     return CryptoJS.SHA256(value).toString();
 }
 
-// 生成RSA密钥对
 export function GenerateRSAKeyPair() {
     const keys = forge.pki.rsa.generateKeyPair(2048);
     const publicKeyPem = forge.pki.publicKeyToPem(keys.publicKey);

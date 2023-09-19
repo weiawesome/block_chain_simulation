@@ -63,6 +63,18 @@
   font-weight: bold;
   border-radius: 1rem;
 }
+.TransactionTr{
+  display: flex;
+  flex-direction: row;
+}
+.TransactionItem{
+  display: flex;
+  flex-direction: column;
+  word-break: break-all;
+  margin: 1%;
+  padding: 1%;
+  border: dashed;
+}
 
 h2{
   font-size: medium;
@@ -123,16 +135,4 @@ li{
   border: none;
   border-radius: 0.5rem;
   font-weight: bolder;
-}
-.TransactionTr{
-  display: flex;
-  flex-direction: row;
-}
-.TransactionItem{
-  display: flex;
-  flex-direction: column;
-  word-break: break-all;
-  margin: 1%;
-  padding: 1%;
-  border: dashed;
 }

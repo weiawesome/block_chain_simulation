@@ -46,6 +46,7 @@ function App() {
       }
 
   }
+
   const [sliderValue, setSliderValue] = useState(1);
   const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let difficulty=Number(event.target.value);
@@ -55,7 +56,6 @@ function App() {
     tmpBlocks[tmpBlocks.length-1].status=false;
     setBlocks(tmpBlocks);
 };
-
 
   function validateContent():boolean{
       if(fromRef.current!.value.length===0){
@@ -80,14 +80,9 @@ function App() {
       }
       return true;
   }
-  function newTransaction():Transaction{
-      let tmpTransaction=new Transaction();
-      tmpTransaction.loadInformation(fromRef.current!.value,toRef.current!.value,Number(amountRef.current!.value),Number(feesRef.current!.value));
-      return tmpTransaction
-  }
   const SignTransaction=()=>{
       if (validateContent()){
-          const transaction=newTransaction()
+          const transaction=new Transaction(fromRef.current!.value,toRef.current!.value,Number(amountRef.current!.value),Number(feesRef.current!.value));
           const {signature, public_key}=transaction.signature()
           setPublicKey(public_key);
           setSignature(signature!);
@@ -95,7 +90,7 @@ function App() {
   }
   const AddTransaction=()=>{
         if (validateContent()){
-            const transaction=newTransaction()
+            const transaction=new Transaction(fromRef.current!.value,toRef.current!.value,Number(amountRef.current!.value),Number(feesRef.current!.value));
             if(transaction.verify(signature,publicKey)){
                 let tmpBlocks=[...blocks];
                 let result=tmpBlocks[tmpBlocks.length-1].addTransaction(transaction);

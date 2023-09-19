@@ -7,15 +7,11 @@ export class Block {
     block_hash:string;
     constructor(hash:string) {
         this.status=false;
-        this.block_top=new BlockTop();
-        this.block_top.previous_hash=hash;
+        this.block_top=new BlockTop(hash);
         this.transaction=[];
-        this.setMarkelRoot();
+        this.block_top.setMarkleRoot(this.transaction);
         this.block_hash=""
         this.setBlockHash();
-    }
-    setMarkelRoot(){
-        this.block_top.setMarkleRoot(this.transaction);
     }
     checkDifficulty(){
         for (let i=0;i<this.block_top.difficulty;i++){
@@ -37,7 +33,7 @@ export class Block {
             }
         }
         this.transaction.push(transaction);
-        this.setMarkelRoot();
+        this.block_top.setMarkleRoot(this.transaction);
         this.setBlockHash();
         this.status=false;
         return true;
@@ -50,9 +46,9 @@ export class BlockTop{
     difficulty:number;
     nonce:bigint;
     markle_root:string;
-    constructor() {
+    constructor(hash:string) {
         this.version="v1";
-        this.previous_hash='0';
+        this.previous_hash=hash;
         let time=new Date();
         this.time_stamp=time.toLocaleString();
         this.difficulty=1;
@@ -98,23 +94,15 @@ export class Transaction{
     to:string;
     amount:number;
     fees:number;
-    constructor() {
-        this.id="";
-        this.from="";
-        this.to="";
-        this.amount=0;
-        this.fees=0;
-    }
-    toString(){
-        return this.to+this.from+this.amount+this.amount;
-    }
-
-    loadInformation(from:string,to:string,amount:number,fees:number){
+    constructor(from:string,to:string,amount:number,fees:number) {
         this.from=from;
         this.to=to;
         this.amount=amount;
         this.fees=fees;
         this.id=Hash_SHA256(this.toString());
+    }
+    toString(){
+        return this.to+this.from+this.amount+this.amount;
     }
     signature(){
         const { public_key, private_key } = GenerateRSAKeyPair();
