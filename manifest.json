@@ -1,0 +1,15 @@
+{
+  "short_name": "Block-Chain simulation",
+  "name": "Block-Chain simulation",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
