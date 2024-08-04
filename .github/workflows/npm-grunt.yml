@@ -34,6 +34,9 @@ jobs:
     - name: Build React App
       run: npm run build
 
+    - name: List build directory
+      run: ls -al ./build
+
     - name: Deploy to GitHub Pages
       if: success()
       uses: peaceiris/actions-gh-pages@v3
