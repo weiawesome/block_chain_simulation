@@ -25,6 +25,12 @@ jobs:
     - name: Install Dependencies
       run: npm install
 
+    - name: Install Missing Babel Plugin
+      run: npm install @babel/plugin-proposal-private-property-in-object --save-dev
+
+    - name: Update Browserslist Database
+      run: npx update-browserslist-db@latest
+
     - name: Build React App
       run: npm run build
 
@@ -32,4 +38,5 @@ jobs:
       if: success()
       uses: peaceiris/actions-gh-pages@v3
       with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./build
