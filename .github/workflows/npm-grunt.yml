@@ -1,4 +1,4 @@
-name: NodeJS with Grunt
+name: Build and Deploy React App
 
 on:
   push:
@@ -22,7 +22,14 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Build
-      run: |
-        npm install
-        grunt
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Build React App
+      run: npm run build
+
+    - name: Deploy to GitHub Pages
+      if: success()
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        publish_dir: ./build
